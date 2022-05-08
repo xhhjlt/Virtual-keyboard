@@ -197,7 +197,6 @@ class Keyboard {
     });
 
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Delete' || event.key === 'Backspace') return;
       event.preventDefault();
       const key = document.querySelector(`.${event.code}`);
       this.keyDownHandler(key);
@@ -236,10 +235,10 @@ class Keyboard {
     if (!key) return;
     if (key.classList.contains('key-char')) this.output.setRangeText(key.querySelector('.active-lang .active-key').innerText, this.output.selectionStart, this.output.selectionStart, 'end');
     if (key.classList.contains('key-space')) this.output.setRangeText(' ', this.output.selectionStart, this.output.selectionStart, 'end');
-    if (key.classList.contains('key-space')) this.output.setRangeText(' ', this.output.selectionStart, this.output.selectionStart, 'end');
-    if (key.classList.contains('key-space')) this.output.setRangeText(' ', this.output.selectionStart, this.output.selectionStart, 'end');
-    if (key.classList.contains('key-space')) this.output.setRangeText(' ', this.output.selectionStart, this.output.selectionStart, 'end');
-    if (key.classList.contains('key-space')) this.output.setRangeText(' ', this.output.selectionStart, this.output.selectionStart, 'end');
+    if (key.classList.contains('Enter')) this.output.setRangeText('\n', this.output.selectionStart, this.output.selectionStart, 'end');
+    if (key.classList.contains('Tab')) this.output.setRangeText('\t', this.output.selectionStart, this.output.selectionStart, 'end');
+    if (key.classList.contains('Backspace')) this.output.setRangeText('', this.output.selectionStart - 1, this.output.selectionStart, 'end');
+    if (key.classList.contains('Delete')) this.output.setRangeText('', this.output.selectionStart, this.output.selectionStart + 1, 'end');
     const charKeys = document.querySelectorAll('.key-char');
     if (key.classList.contains('CapsLock')) {
       this.isCapsLock = !this.isCapsLock;
