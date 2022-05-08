@@ -174,6 +174,8 @@ class Keyboard {
     this.isAlt = false;
     this.isShift = false;
     this.output = document.querySelector('.text');
+    this.output.focus();
+    this.output.addEventListener('blur', () => { this.output.focus(); });
     this.element = document.createElement('div');
     this.element.classList.add('keyboard');
     for (let i = 0; i < this.layout.length; i += 1) {
@@ -189,6 +191,9 @@ class Keyboard {
       event.preventDefault();
       const key = event.target.closest('.key');
       this.keyDownHandler(key);
+      document.addEventListener('mouseup', () => {
+        this.keyUpHandler(key);
+      }, { once: true });
     });
 
     document.addEventListener('keydown', (event) => {
@@ -196,13 +201,45 @@ class Keyboard {
       event.preventDefault();
       const key = document.querySelector(`.${event.code}`);
       this.keyDownHandler(key);
+      document.addEventListener('keyup', () => {
+        this.keyUpHandler(key);
+      }, { once: true });
     });
+  }
+
+  keyUpHandler(key) {
+    if (key.classList.contains('ControlRight') || key.classList.contains('ControlLeft')) {
+      this.isCtrl = false;
+    }
+    if (key.classList.contains('AltRight') || key.classList.contains('AltLeft')) {
+      this.isAlt = false;
+    }
+    const charKeys = document.querySelectorAll('.key-char');
+    if (key.classList.contains('ShiftLeft') || key.classList.contains('ShiftRight')) {
+      this.isShift = false;
+      charKeys.forEach((charKey) => {
+        let activeKeys = charKey.querySelectorAll('.active-key');
+        activeKeys.forEach((activeKey) => {
+          activeKey.classList.toggle('hidden');
+          activeKey.classList.toggle('active-key');
+        });
+        activeKeys = (this.isCapsLock ? charKey.querySelectorAll('.char-capsed') : charKey.querySelectorAll('.char-normal'));
+        activeKeys.forEach((activeKey) => {
+          activeKey.classList.toggle('hidden');
+          activeKey.classList.toggle('active-key');
+        });
+      });
+    }
   }
 
   keyDownHandler(key) {
     if (!key) return;
-    if (key.classList.contains('key-char')) this.output.value += key.querySelector('.active-lang .active-key').innerText;
-    if (key.classList.contains('key-space')) this.output.value += ' ';
+    if (key.classList.contains('key-char')) this.output.setRangeText(key.querySelector('.active-lang .active-key').innerText, this.output.selectionStart, this.output.selectionStart, 'end');
+    if (key.classList.contains('key-space')) this.output.setRangeText(' ', this.output.selectionStart, this.output.selectionStart, 'end');
+    if (key.classList.contains('key-space')) this.output.setRangeText(' ', this.output.selectionStart, this.output.selectionStart, 'end');
+    if (key.classList.contains('key-space')) this.output.setRangeText(' ', this.output.selectionStart, this.output.selectionStart, 'end');
+    if (key.classList.contains('key-space')) this.output.setRangeText(' ', this.output.selectionStart, this.output.selectionStart, 'end');
+    if (key.classList.contains('key-space')) this.output.setRangeText(' ', this.output.selectionStart, this.output.selectionStart, 'end');
     const charKeys = document.querySelectorAll('.key-char');
     if (key.classList.contains('CapsLock')) {
       this.isCapsLock = !this.isCapsLock;
@@ -238,6 +275,36 @@ class Keyboard {
         });
       });
     }
+    if (key.classList.contains('ControlRight') || key.classList.contains('ControlLeft')) {
+      this.isCtrl = true;
+      if (this.isAlt) this.changeLang();
+    }
+    if (key.classList.contains('AltRight') || key.classList.contains('AltLeft')) {
+      this.isAlt = true;
+      if (this.isCtrl) this.changeLang();
+    }
+  }
+
+  changeLang() {
+    const keysEn = document.querySelectorAll('.en');
+    const keysRu = document.querySelectorAll('.ru');
+    switch (this.language) {
+      case 'ru':
+        this.language = 'en';
+        break;
+      case 'en':
+        this.language = 'ru';
+        break;
+      default: break;
+    }
+    keysRu.forEach((elem) => {
+      elem.classList.toggle('active-lang');
+      elem.classList.toggle('hidden');
+    });
+    keysEn.forEach((elem) => {
+      elem.classList.toggle('active-lang');
+      elem.classList.toggle('hidden');
+    });
   }
 
   createKey(keyData) {

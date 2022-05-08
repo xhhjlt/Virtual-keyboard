@@ -81,9 +81,15 @@ body {
 }
 
 .key-space {
-  -webkit-box-flex: 14;
-      -ms-flex-positive: 14;
-          flex-grow: 14;
+  -webkit-box-flex: 12;
+      -ms-flex-positive: 12;
+          flex-grow: 12;
+}
+
+.Enter {
+  -webkit-box-flex: 3;
+      -ms-flex-positive: 3;
+          flex-grow: 3;
 }
 
 .key-pressed {

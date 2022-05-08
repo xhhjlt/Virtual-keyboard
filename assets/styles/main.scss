@@ -58,7 +58,10 @@ column-gap: 5px;
 }
 .key-space {
     @extend .key;
-    flex-grow: 14;
+    flex-grow: 12;
+}
+.Enter {
+    flex-grow: 3;
 }
 
 .key-pressed {
