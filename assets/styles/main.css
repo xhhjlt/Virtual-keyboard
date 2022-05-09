@@ -1,0 +1,111 @@
+body {
+  background: #f2fdfc;
+}
+
+.conteiner {
+  margin: 0px auto;
+  width: 720px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #180230;
+}
+
+.text {
+  resize: none;
+  width: 700px;
+  height: 150px;
+  overflow: auto;
+  font-size: 32px;
+}
+
+.keyboard {
+  width: 700px;
+  padding: 5px;
+  background: #babaf3;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  row-gap: 5px;
+}
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 5px;
+          column-gap: 5px;
+}
+
+.key, .key-mod, .key-char, .key-space {
+  height: 40px;
+  color: antiquewhite;
+  background-color: #0c0c53;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 2px solid #4b4b91;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+  -webkit-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+  -webkit-transition-property: border-color;
+  transition-property: border-color;
+  transition-duration: 0.3s;
+}
+
+.key-mod {
+  background-color: #050531;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.key-char {
+  width: 40px;
+}
+
+.key-space {
+  -webkit-box-flex: 12;
+      -ms-flex-positive: 12;
+          flex-grow: 12;
+}
+
+.Enter {
+  -webkit-box-flex: 3;
+      -ms-flex-positive: 3;
+          flex-grow: 3;
+}
+
+.key-pressed {
+  background-color: #28288a;
+  border: 2px solid #babaf3;
+  border-radius: 7px;
+}
+
+.hidden {
+  display: none;
+}
+/*# sourceMappingURL=main.css.map */
