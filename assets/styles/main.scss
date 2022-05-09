@@ -45,7 +45,10 @@ column-gap: 5px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    transition-property: border-color;
+    transition-duration: 0.3s;
 }
 .key-mod {
     @extend .key;

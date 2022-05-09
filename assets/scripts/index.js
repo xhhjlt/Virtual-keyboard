@@ -200,13 +200,16 @@ class Keyboard {
       event.preventDefault();
       const key = document.querySelector(`.${event.code}`);
       this.keyDownHandler(key);
-      document.addEventListener('keyup', () => {
-        this.keyUpHandler(key);
-      }, { once: true });
+    });
+    document.addEventListener('keyup', (eventUp) => {
+      const keyUp = document.querySelector(`.${eventUp.code}`);
+      this.keyUpHandler(keyUp);
     });
   }
 
   keyUpHandler(key) {
+    if (!key) return;
+    key.classList.remove('key-pressed');
     if (key.classList.contains('ControlRight') || key.classList.contains('ControlLeft')) {
       this.isCtrl = false;
     }
@@ -233,6 +236,7 @@ class Keyboard {
 
   keyDownHandler(key) {
     if (!key) return;
+    key.classList.add('key-pressed');
     if (key.classList.contains('key-char')) this.output.setRangeText(key.querySelector('.active-lang .active-key').innerText, this.output.selectionStart, this.output.selectionStart, 'end');
     if (key.classList.contains('key-space')) this.output.setRangeText(' ', this.output.selectionStart, this.output.selectionStart, 'end');
     if (key.classList.contains('Enter')) this.output.setRangeText('\n', this.output.selectionStart, this.output.selectionStart, 'end');
@@ -296,6 +300,7 @@ class Keyboard {
         break;
       default: break;
     }
+    localStorage.setItem('lang', this.language);
     keysRu.forEach((elem) => {
       elem.classList.toggle('active-lang');
       elem.classList.toggle('hidden');
